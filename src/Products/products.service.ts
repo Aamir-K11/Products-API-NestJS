@@ -1,8 +1,8 @@
 import { Model } from 'mongoose';
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import {Product, ProductDocument} from './product.schema';
-import { CreateProductDto } from './create-product.dto';
+import {Product, ProductDocument} from './schema/product.schema';
+import { CreateProductDto } from './dto/create-product.dto';
 
 @Injectable()
 export class ProductsService{
@@ -19,5 +19,10 @@ export class ProductsService{
     async findAll() : Promise<Product[]>
     {
         return this.productModel.find().exec();
+    }
+
+
+    async findOnebyId(productId : string) : Promise<Product> {
+        return this.productModel.findOne({name: productId}).exec();
     }
 }
